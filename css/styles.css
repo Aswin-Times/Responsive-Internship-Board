@@ -52,3 +52,60 @@ body {
   white-space: nowrap;
 }
 .skip-link { position: absolute; left: -9999px; }
+
+/* ---------- Controls ---------- */
+.controls { margin: 24px 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.filter-form { display: grid; gap: 16px; }
+.field { margin: 0; padding: 0; border: 0; min-width: 0; }
+.field label,
+.field legend { display: block; font-weight: 600; margin-bottom: 6px; padding: 0; }
+.field input[type="search"] {
+  width: 100%;
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid #8a90a3;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+}
+.hint { margin: 4px 0 0; font-size: .85rem; color: var(--muted); }
+
+.chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; }
+.chip label {
+  display: inline-block;
+  font-weight: 500;
+  margin: 0;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  background: var(--surface);
+}
+.chip input:checked + label { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  justify-self: start;
+}
+.btn-secondary { background: var(--surface); color: var(--accent); }
+
+/* ---------- Results + states ---------- */
+.results-bar { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; margin-bottom: 12px; }
+.results-heading { margin: 0; font-size: 1.25rem; }
+.result-count { margin: 0; color: var(--muted); }
+
+.state { background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 32px 20px; text-align: center; }
+.state h3 { margin: 0 0 4px; }
+.state p { margin: 0 0 16px; color: var(--muted); }
+.state-error { border: 1px solid #c62828; background: #fdf1f1; }
+.state-error h3 { color: #a31515; }
+[hidden] { display: none !important; }

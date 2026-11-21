@@ -20,12 +20,48 @@
   <main class="container">
     <section class="controls" aria-labelledby="filters-heading">
       <h2 id="filters-heading" class="visually-hidden">Search and filter</h2>
-      <!-- Search and domain filters are added in step 2 -->
+      <form id="filter-form" class="filter-form" role="search" novalidate>
+        <div class="field field-search">
+          <label for="search">Search internships</label>
+          <input id="search" name="search" type="search" autocomplete="off"
+                 placeholder="Title, skill or location" aria-describedby="search-hint">
+          <p id="search-hint" class="hint">Try “SQL”, “Remote” or “Pune”.</p>
+        </div>
+
+        <fieldset class="field field-domains">
+          <legend>Domain</legend>
+          <div id="domain-options" class="chip-group">
+            <!-- Domain radio buttons are generated from the data -->
+          </div>
+        </fieldset>
+
+        <button type="reset" class="btn btn-secondary">Clear filters</button>
+      </form>
     </section>
 
     <section aria-labelledby="results-heading">
-      <h2 id="results-heading" class="results-heading">Open internships</h2>
-      <ul id="results" class="card-grid" tabindex="-1"></ul>
+      <div class="results-bar">
+        <h2 id="results-heading" class="results-heading">Open internships</h2>
+        <p id="result-count" class="result-count" role="status" aria-live="polite"></p>
+      </div>
+
+      <div id="loading-state" class="state" role="status">
+        <p>Loading internships…</p>
+      </div>
+
+      <div id="error-state" class="state state-error" role="alert" hidden>
+        <h3>We couldn’t load internships</h3>
+        <p id="error-message">Please check your connection and try again.</p>
+        <button id="retry-btn" type="button" class="btn">Try again</button>
+      </div>
+
+      <div id="empty-state" class="state" hidden>
+        <h3>No internships match your filters</h3>
+        <p>Try a different keyword or choose another domain.</p>
+        <button id="empty-reset-btn" type="button" class="btn btn-secondary">Clear filters</button>
+      </div>
+
+      <ul id="results" class="card-grid" tabindex="-1" aria-labelledby="results-heading"></ul>
     </section>
   </main>
 
