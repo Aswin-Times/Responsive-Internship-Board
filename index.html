@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Browse and filter internship openings by keyword and domain.">
+  <meta name="description" content="Live internships from Internshala, Arbeitnow and Remotive. Search and filter by keyword, domain and source.">
   <title>Internship Board</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -13,7 +13,7 @@
   <header class="site-header">
     <div class="container">
       <h1>Internship Board</h1>
-      <p class="tagline">Find an internship that fits your skills.</p>
+      <p class="tagline">Live internships from Internshala, Arbeitnow and Remotive, in one place.</p>
     </div>
   </header>
 
@@ -24,16 +24,25 @@
         <div class="field field-search">
           <label for="search">Search internships</label>
           <input id="search" name="search" type="search" autocomplete="off"
-                 placeholder="Title, skill or location" aria-describedby="search-hint">
-          <p id="search-hint" class="hint">Try “SQL”, “Remote” or “Pune”. Press <kbd>/</kbd> to jump here, <kbd>Esc</kbd> to clear.</p>
+                 placeholder="Title, company, skill or location" aria-describedby="search-hint">
+          <p id="search-hint" class="hint">Try “React”, “Remote” or “Pune”. Press <kbd>/</kbd> to jump here, <kbd>Esc</kbd> to clear.</p>
         </div>
 
-        <fieldset class="field field-domains">
-          <legend>Domain</legend>
-          <div id="domain-options" class="chip-group">
-            <!-- Domain radio buttons are generated from the data -->
-          </div>
-        </fieldset>
+        <div class="filter-groups">
+          <fieldset class="field">
+            <legend>Domain</legend>
+            <div id="domain-options" class="chip-group">
+              <!-- Generated from the data -->
+            </div>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Source</legend>
+            <div id="source-options" class="chip-group">
+              <!-- Generated from the data -->
+            </div>
+          </fieldset>
+        </div>
 
         <button type="reset" class="btn btn-secondary">Clear filters</button>
       </form>
@@ -44,10 +53,13 @@
         <h2 id="results-heading" class="results-heading" tabindex="-1">Open internships</h2>
         <p id="result-count" class="result-count" role="status" aria-live="polite"></p>
       </div>
-      <p id="cards-hint" class="hint cards-hint">Tab into the list, then use the arrow keys, <kbd>Home</kbd> and <kbd>End</kbd> to move between cards.</p>
+
+      <div id="data-status" class="data-status" role="status" hidden></div>
+
+      <p id="cards-hint" class="hint cards-hint">Tab into the list, then use the arrow keys, <kbd>Home</kbd> and <kbd>End</kbd> to move between cards. <kbd>Enter</kbd> opens the original posting.</p>
 
       <div id="loading-state" class="state" role="status">
-        <p>Loading internships…</p>
+        <p>Fetching live internships…</p>
       </div>
 
       <div id="error-state" class="state state-error" role="alert" hidden>
@@ -58,17 +70,26 @@
 
       <div id="empty-state" class="state" hidden>
         <h3>No internships match your filters</h3>
-        <p>Try a different keyword or choose another domain.</p>
+        <p>Try a different keyword, domain or source.</p>
         <button id="empty-reset-btn" type="button" class="btn btn-secondary">Clear filters</button>
       </div>
 
       <ul id="results" class="card-grid" aria-labelledby="results-heading" aria-describedby="cards-hint"></ul>
+
+      <div class="load-more">
+        <button id="load-more-btn" type="button" class="btn btn-secondary" hidden>Show more internships</button>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>All listings are fictional sample data. Built with HTML, CSS and vanilla JavaScript.</p>
+      <p>Listings belong to their sources and link back to the original posting:
+        <a href="https://internshala.com" rel="noopener">Internshala</a>,
+        <a href="https://www.arbeitnow.com" rel="noopener">Arbeitnow</a> and
+        <a href="https://remotive.com" rel="noopener">Remotive</a>.
+        If live data is unavailable, fictional sample data is shown instead.</p>
+      <p>Built with HTML, CSS and vanilla JavaScript.</p>
     </div>
   </footer>
 

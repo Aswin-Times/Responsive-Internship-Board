@@ -8,6 +8,7 @@
   --accent-soft: #ecedfb;
   --radius: 12px;
   --focus: #d97706;
+  --live: #1f8a4c;
 }
 
 *,
@@ -182,6 +183,7 @@ kbd {
     --accent: #9da2ff;
     --accent-soft: #2a2d4d;
     --focus: #ffb547;
+    --live: #4cc38a;
   }
   .btn { color: #12141c; }
   .btn-secondary { color: var(--accent); }
@@ -193,4 +195,62 @@ kbd {
 
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+
+/* ---------- Live data additions ---------- */
+.filter-groups { display: grid; gap: 16px; }
+
+.card article { display: flex; flex-direction: column; height: 100%; }
+.card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.card-source {
+  flex-shrink: 0;
+  font-size: .72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.card-title { margin-bottom: 2px; }
+.card-company { margin: 0 0 12px; color: var(--muted); font-weight: 500; }
+.card-skills { margin-bottom: 12px; }
+.card-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.card-posted { font-size: .8rem; color: var(--muted); }
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+.card-link::after { content: " \2197"; margin-left: 4px; }
+
+.data-status {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: .9rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.data-status.is-live { border-left: 4px solid var(--live); }
+.data-status.is-sample { border-left: 4px solid var(--focus); }
+
+.load-more { display: flex; justify-content: center; margin-top: 24px; }
+.load-more .btn { justify-self: center; }
+
+.site-footer a { color: inherit; }
+
+@media (min-width: 960px) {
+  .filter-groups { gap: 12px; }
 }
