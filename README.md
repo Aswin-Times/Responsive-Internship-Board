@@ -8,7 +8,7 @@ An accessible internship listing page that works on mobile, tablet and desktop. 
 
 | Host | URL |
 | --- | --- |
-| Vercel | _add after first deploy_ |
+| Vercel | https://responsive-internship-board.vercel.app |
 | Render | https://responsive-internship-board-4g7g.onrender.com |
 
 Append `?simulate=error` to either URL to see the error state.
