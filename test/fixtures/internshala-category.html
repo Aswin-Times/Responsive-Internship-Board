@@ -1,0 +1,38 @@
+<!-- Synthetic fixture: mirrors the markup of an Internshala category page
+     (as of Nov 2026) with made-up companies, so parser tests run offline. -->
+<div id="internship_list_container_1">
+  <div class="container-fluid individual_internship logged_out_jd_summary visibilityTrackerItem" id="individual_internship_1001" internshipId="1001" data-href="/internship/detail/web-development-internship-at-acme1001">
+    <div class="internship_meta duration_meta">
+      <h2 class="job-internship-name"><a class="job-title-href" href="/internship/detail/web-development-internship-at-acme1001">Web Development</a></h2>
+      <p class="company-name"> Acme Labs </p>
+    </div>
+    <div class="individual_internship_details">
+      <div class="detail-row-1">
+        <div class="row-1-item locations"><i class="ic-16-map-pin"></i><span><a>Work from home</a></span></div>
+        <div class="row-1-item"><i class="ic-16-money"></i><span class="stipend">₹ 5,000 - 7,000 /month</span></div>
+        <div class="row-1-item"><i class="ic-16-calendar"></i><span>4 Months</span></div>
+      </div>
+      <div class="job_skills">
+        <div class="skill_container"><div class="job_skill">HTML</div></div>
+        <div class="skill_container"><div class="job_skill">CSS</div></div>
+      </div>
+      <div class="detail-row-2"><div class="color-labels"><div class="status-success"><i class="ic-16-reschedule"></i><span>Today</span></div></div></div>
+    </div>
+  </div>
+  <div class="container-fluid individual_internship logged_out_jd_summary visibilityTrackerItem" id="individual_internship_1002" internshipId="1002">
+    <div class="internship_meta duration_meta">
+      <h2 class="job-internship-name"><a class="job-title-href" href="/internship/detail/react-internship-in-pune-at-globex1002">React Developer</a></h2>
+      <p class="company-name">Globex</p>
+    </div>
+    <div class="individual_internship_details">
+      <div class="detail-row-1">
+        <div class="row-1-item locations"><i class="ic-16-map-pin"></i><span><a>Pune</a>, <a>Nashik</a> (Hybrid)</span></div>
+        <div class="row-1-item"><i class="ic-16-money"></i><span class="stipend">Unpaid</span></div>
+        <div class="row-1-item"><i class="ic-16-calendar"></i><span>2 Months</span></div>
+      </div>
+      <div class="detail-row-2"><div class="color-labels"><div class="status-inactive"><i class="ic-16-reschedule"></i><span>2 weeks ago</span></div></div></div>
+    </div>
+  </div>
+  <!-- Malformed card (no title link) must be skipped, not crash the parser -->
+  <div class="container-fluid individual_internship" internshipId="1003"><p class="company-name">Broken Co</p></div>
+</div>
