@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#results">Skip to internship listings</a>
+  <a class="skip-link" href="#results-heading">Skip to internship listings</a>
 
   <header class="site-header">
     <div class="container">
@@ -25,7 +25,7 @@
           <label for="search">Search internships</label>
           <input id="search" name="search" type="search" autocomplete="off"
                  placeholder="Title, skill or location" aria-describedby="search-hint">
-          <p id="search-hint" class="hint">Try “SQL”, “Remote” or “Pune”.</p>
+          <p id="search-hint" class="hint">Try “SQL”, “Remote” or “Pune”. Press <kbd>/</kbd> to jump here, <kbd>Esc</kbd> to clear.</p>
         </div>
 
         <fieldset class="field field-domains">
@@ -41,9 +41,10 @@
 
     <section aria-labelledby="results-heading">
       <div class="results-bar">
-        <h2 id="results-heading" class="results-heading">Open internships</h2>
+        <h2 id="results-heading" class="results-heading" tabindex="-1">Open internships</h2>
         <p id="result-count" class="result-count" role="status" aria-live="polite"></p>
       </div>
+      <p id="cards-hint" class="hint cards-hint">Tab into the list, then use the arrow keys, <kbd>Home</kbd> and <kbd>End</kbd> to move between cards.</p>
 
       <div id="loading-state" class="state" role="status">
         <p>Loading internships…</p>
@@ -61,7 +62,7 @@
         <button id="empty-reset-btn" type="button" class="btn btn-secondary">Clear filters</button>
       </div>
 
-      <ul id="results" class="card-grid" tabindex="-1" aria-labelledby="results-heading"></ul>
+      <ul id="results" class="card-grid" aria-labelledby="results-heading" aria-describedby="cards-hint"></ul>
     </section>
   </main>
 

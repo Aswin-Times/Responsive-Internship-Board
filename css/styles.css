@@ -7,6 +7,7 @@
   --accent: #3b3fb6;
   --accent-soft: #ecedfb;
   --radius: 12px;
+  --focus: #d97706;
 }
 
 *,
@@ -51,7 +52,7 @@ body {
   overflow: hidden; clip: rect(0 0 0 0);
   white-space: nowrap;
 }
-.skip-link { position: absolute; left: -9999px; }
+
 
 /* ---------- Controls ---------- */
 .controls { margin: 24px 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
@@ -109,3 +110,87 @@ body {
 .state-error { border: 1px solid #c62828; background: #fdf1f1; }
 .state-error h3 { color: #a31515; }
 [hidden] { display: none !important; }
+
+/* ---------- Accessibility: focus, skip link, touch targets ---------- */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 10;
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.skip-link:focus { top: 16px; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.chip input:focus-visible + label { outline: 3px solid var(--focus); outline-offset: 2px; }
+.card:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-color: var(--accent); }
+.results-heading:focus { outline: none; }
+
+/* Minimum 44px tap targets on touch screens */
+.btn,
+.chip label,
+.field input[type="search"] { min-height: 44px; }
+.chip label { display: inline-flex; align-items: center; }
+
+kbd {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: .8em;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0 4px;
+  background: var(--surface);
+}
+.cards-hint { margin: 0 0 12px; }
+
+/* ---------- Responsive layouts ---------- */
+/* Mobile first: one column (default above). */
+
+/* Tablet: two-column cards */
+@media (min-width: 600px) {
+  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-header h1 { font-size: 2rem; }
+}
+
+/* Desktop: three-column cards, search and domains side by side */
+@media (min-width: 960px) {
+  .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .filter-form {
+    grid-template-columns: minmax(260px, 1fr) 2fr auto;
+    align-items: start;
+  }
+  .filter-form .btn { margin-top: 30px; }
+}
+
+/* Hide the keyboard hint on touch-only devices */
+@media (hover: none) and (pointer: coarse) {
+  .cards-hint { display: none; }
+}
+
+/* ---------- Dark mode & motion ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12141c;
+    --surface: #1c1f2a;
+    --text: #eceef5;
+    --muted: #a8aec0;
+    --border: #353a4b;
+    --accent: #9da2ff;
+    --accent-soft: #2a2d4d;
+    --focus: #ffb547;
+  }
+  .btn { color: #12141c; }
+  .btn-secondary { color: var(--accent); }
+  .chip input:checked + label { color: #12141c; }
+  .state-error { background: #2b1a1d; border-color: #e57373; }
+  .state-error h3 { color: #ff9a9a; }
+  .field input[type="search"] { border-color: #6c7286; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}

@@ -29,6 +29,10 @@ const state = {
 function createCard(internship) {
   const li = document.createElement("li");
   li.className = "card";
+  // Roving tabindex: only one card is in the Tab order; arrow keys move between cards.
+  li.tabIndex = -1;
+  li.setAttribute("aria-labelledby", `title-${internship.id}`);
+  li.setAttribute("aria-describedby", `meta-${internship.id}`);
 
   const article = document.createElement("article");
   article.setAttribute("aria-labelledby", `title-${internship.id}`);
@@ -44,6 +48,7 @@ function createCard(internship) {
 
   const meta = document.createElement("dl");
   meta.className = "card-meta";
+  meta.id = `meta-${internship.id}`;
   [
     ["Mode", internship.mode],
     ["Location", internship.location],
@@ -142,7 +147,51 @@ function update() {
     return;
   }
   els.results.replaceChildren(...filtered.map(createCard));
+  els.results.firstElementChild.tabIndex = 0;
   showOnly("results");
+}
+
+/* ---------- Keyboard navigation ---------- */
+
+function columnCount() {
+  return getComputedStyle(els.results).gridTemplateColumns.split(" ").length;
+}
+
+/** Arrow keys / Home / End move focus between cards (WAI-ARIA grid-style roving focus). */
+function onCardKeydown(e) {
+  const cards = [...els.results.children];
+  const current = cards.indexOf(document.activeElement);
+  if (current === -1) return;
+
+  const cols = columnCount();
+  const moves = {
+    ArrowRight: current + 1,
+    ArrowLeft: current - 1,
+    ArrowDown: current + cols,
+    ArrowUp: current - cols,
+    Home: 0,
+    End: cards.length - 1,
+  };
+  if (!(e.key in moves)) return;
+
+  e.preventDefault();
+  const next = Math.max(0, Math.min(cards.length - 1, moves[e.key]));
+  cards[current].tabIndex = -1;
+  cards[next].tabIndex = 0;
+  cards[next].focus();
+}
+
+/** Global shortcuts: "/" jumps to search, Escape clears it. */
+function onGlobalKeydown(e) {
+  const typing = e.target.matches("input, textarea, select");
+  if (e.key === "/" && !typing && !els.search.disabled) {
+    e.preventDefault();
+    els.search.focus();
+  } else if (e.key === "Escape" && e.target === els.search && els.search.value) {
+    els.search.value = "";
+    state.query = "";
+    update();
+  }
 }
 
 function resetFilters() {
@@ -212,6 +261,9 @@ els.form.addEventListener("reset", () => {
     els.search.focus();
   });
 });
+
+els.results.addEventListener("keydown", onCardKeydown);
+document.addEventListener("keydown", onGlobalKeydown);
 
 els.emptyReset.addEventListener("click", resetFilters);
 els.retry.addEventListener("click", init);
